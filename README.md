@@ -82,7 +82,7 @@ The computational results are presented in the above image.
 
 ## Mathematical Foundation
 
-The Gaussian map is a mapping that transforms each point on a surface to a point on the unit sphere. The Weingarten map, the differential of the Gaussian map, transforms each tangent vector on a surface to the tangent vector of the unit sphere linearly. Due to the two tangent spaces coinciding with each other, the Weingarten map can be represented to be a $2\times2$ matrix field.  The curvature at a point on the surface can be computed using the Weingarten map as follows:
+The Gaussian map is a mapping that transforms each point on a surface to a point on the unit sphere. The Weingarten map, the differential of the Gaussian map, transforms each tangent vector on a surface to the tangent vector of the unit sphere linearly. Due to the two tangent spaces coinciding, the Weingarten map can be represented as a $2\times2$ matrix field.  The curvature at a point on the surface can be computed using the Weingarten map as follows:
 
 Let $N:M\to S^2$ be the unit normal vector at the point.
 Let $dN: T_p(M)\to T_{N(p)}S^2$ be Weingarten map, written as $W(p)$.
@@ -92,6 +92,6 @@ The Gauss-Bonnet theorem unveils the deep connection between the local geometry 
 $$\int_M KdA = 2\pi* \chi$$
 
 
-##Contact Information
+## Contact Information
 If you have any questions or feedback, you can contact the project maintainer @Luo-Yihao by email y.luo23@imperial.ac.uk
 
