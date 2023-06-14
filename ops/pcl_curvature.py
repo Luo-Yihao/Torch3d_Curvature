@@ -5,7 +5,19 @@ from pytorch3d.ops import knn_points,knn_gather
 
 from .utils import one_hot_sparse
 
-def Weingarten_maps(pointscloud, k=50):
+def Weingarten_maps(pointscloud:torch.Tensor, k=50)->torch.Tensor:
+    """
+    Compute the Weingarten maps of a point cloud
+    Args:
+        pointscloud: Tensor of shape (B,N,3) where N is the number of points in each batch
+        k: int, number of neighbors
+    Returns:
+        Weingarten_fields: Tensor of shape (B,N,2,2) where N is the number of points
+        normals_field: Tensor of shape (B,N,3) where N is the number of points
+        tangent1_field: Tensor of shape (B,N,3) 
+        tangent2_field: Tensor of shape (B,N,3) 
+    """
+
 
     pointscloud_shape = pointscloud.shape
     batch_size = pointscloud_shape[0]
@@ -78,6 +90,14 @@ def Weingarten_maps(pointscloud, k=50):
     return Weingarten_fields, normals_field, tangent1_field, tangent2_field
 
 def Curvature_pcl(pointscloud, k=50, return_princpals=False):
+    """
+    Compute the gaussian curvature of point clouds
+    pointscloud: B x N x 3
+    k: int, number of neighbors
+    return_princpals: bool,if True, return principal curvature and principal directions
+    if False, return gaussian curvature, mean curvature only
+    """
+
     pointscloud_shape = pointscloud.shape
     batch_size = pointscloud_shape[0]
     num_points = torch.LongTensor([pointscloud_shape[1]]*batch_size)
@@ -91,4 +111,5 @@ def Curvature_pcl(pointscloud, k=50, return_princpals=False):
         gaussian_curvature_pcl = torch.det(Weingarten_fields)
         mean_curvature_pcl = Weingarten_fields.diagonal(offset=0, dim1=-1, dim2=-2).mean(-1)
         return gaussian_curvature_pcl, mean_curvature_pcl
+    
 
